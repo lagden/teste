@@ -1,31 +1,30 @@
 'use strict';
 
 var multiline = require('multiline'),
+    colors = require('colors'),
     pergunta = require('../lib/pergunta');
 
-var qUm = multiline(function() {
-    /*
-Analise o código abaixo:
+var qUm = '// Leia o código abaixo e responda:\n'.yellow + multiline(function() {/*
 
-function basic() {
+function fn() {
     var a = 10;
     if(a > 5)
         a = 7;
     console.log(a);
 }
 
-O que aparecerá na tela?
+fn();
 
-*/
-});
+*/}) + '\n\n// O que aparecerá na tela?'.green;
 
 var questions = [{
     type: 'list',
     name: 'quanto',
     message: 'Quer pagar quanto pelo seguro?',
+    correta: 'Eu sou Batman',
     choices: ['R$ 100 + o dinheiro do busão', 'O suficiente', 'Eu sou Batman']
 }];
 
-module.exports = function(callback) {
-    pergunta(questions, callback);
+module.exports = function(json, callback) {
+    pergunta(questions, json, callback);
 };

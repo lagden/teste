@@ -1,10 +1,10 @@
 'use strict';
 
 var multiline = require('multiline'),
+    colors = require('colors'),
     pergunta = require('../lib/pergunta');
 
-var qUm = multiline(function() {/*
-Analise o código abaixo:
+var qUm = '// Leia o código abaixo e responda:\n'.yellow + multiline(function() {/*
 
 function fn() {
     var a = 10;
@@ -15,13 +15,9 @@ function fn() {
 
 fn();
 
-O que aparecerá na tela?
+*/}) + '\n\n// O que aparecerá na tela?'.green;
 
-*/
-});
-
-var qDois = multiline(function() {/*
-O anteior foi bem fácil, veja esse:
+var qDois = '// O anteior foi bem fácil, veja esse:\n'.yellow + multiline(function() {/*
 
 function fn() {
     if (true) {
@@ -32,13 +28,9 @@ function fn() {
 
 fn();
 
-O que aparecerá na tela?
+*/}) + '\n\n// O que aparecerá na tela?'.green;
 
-*/
-});
-
-var qTres = multiline(function() {/*
-Agora um pouco de variáveis globais:
+var qTres = '// Agora um pouco de variáveis globais:\n'.yellow + multiline(function() {/*
 
 var a = 5;
 
@@ -53,13 +45,9 @@ function fn2() {
 fun1();
 fun2();
 
-O que aparecerá na tela?
+*/}) + '\n\n// O que aparecerá na tela?'.green;
 
-*/
-});
-
-var qQuatro = multiline(function() {/*
-Veja essa então:
+var qQuatro = '// Veja essa então:\n'.yellow + multiline(function() {/*
 
 var a = 5;
 
@@ -68,15 +56,11 @@ function fn() {
     console.log(a);
 }
 
-fun();
+fn();
 
-O que aparecerá na tela?
+*/}) + '\n\n// O que aparecerá na tela?'.green;
 
-*/
-});
-
-var qCinco = multiline(function() {/*
-Um pouco mais complicado:
+var qCinco = '// Um pouco mais complicado:\n'.yellow + multiline(function() {/*
 
 var a = 6;
 function fn() {
@@ -91,13 +75,9 @@ function fn() {
 fn();
 ​console.log(a);
 
-O que aparecerá na tela?
+*/}) + '\n\n// O que aparecerá na tela?'.green;
 
-*/
-});
-
-var qSeis = multiline(function() {/*
-Vamos ver clausuras (closures):
+var qSeis = '// Vamos ver clausuras (closures):\n'.yellow + multiline(function() {/*
 
 function getFunc() {
     var a = 7;
@@ -108,13 +88,9 @@ function getFunc() {
 var fn = getFunc();
 fn(5);
 
-O que aparecerá na tela?
+*/}) + '\n\n// O que aparecerá na tela?'.green;
 
-*/
-});
-
-var qSete = multiline(function() {/*
-Esse é um problema que acontece com frequência:
+var qSete = '// Esse é um problema que acontece com frequência:\n'.yellow + multiline(function() {/*
 
 var comandos = ['anda', 'pula', 'bate', 'defende'],
     fn = {};
@@ -128,13 +104,9 @@ for (var i = 0, len = comandos.length; i < len; i++) {
 
 fn['anda']();
 
-O que aparecerá na tela?
+*/}) + '\n\n// O que aparecerá na tela?'.green;
 
-*/
-});
-
-var qOito = multiline(function() {/*
-E agora:
+var qOito = '// E agora:\n'.yellow + multiline(function() {/*
 
 var comandos = ['anda', 'pula', 'bate', 'defende'],
     fn = {};
@@ -147,53 +119,58 @@ comandos.map(function(cmd) {
 
 fn['anda']();
 
-O que aparecerá na tela?
-
-*/
-});
+*/}) + '\n\n// O que aparecerá na tela?'.green;
 
 var questions = [{
     type: 'list',
     name: 'um',
     message: qUm,
+    correta: '7',
     choices: ['7', '10', 'undefined', 'null']
 }, {
     type: 'list',
     name: 'dois',
     message: qDois,
+    correta: '10',
     choices: ['0', '10', 'undefined', 'null']
 }, {
     type: 'list',
     name: 'tres',
     message: qTres,
+    correta: '6',
     choices: ['5', '6', 'undefined', 'null']
 }, {
     type: 'list',
     name: 'quatro',
     message: qQuatro,
+    correta: '6',
     choices: ['5', '6']
 }, {
     type: 'list',
     name: 'cinco',
     message: qCinco,
+    correta: '8; 7; 6',
     choices: ['6; 7; 8', '7; 6; 8', '8; 7; 6', '8; 6; 7']
 }, {
     type: 'list',
     name: 'seis',
     message: qSeis,
+    correta: '12',
     choices: ['5', '7', '12', 'undefined', 'null']
 }, {
     type: 'list',
     name: 'sete',
     message: qSete,
+    correta: 'defende',
     choices: ['anda', 'pula', 'bate', 'defende']
 }, {
     type: 'list',
     name: 'oito',
     message: qOito,
+    correta: 'anda',
     choices: ['anda', 'pula', 'bate', 'defende']
 }];
 
-module.exports = function(callback) {
-    pergunta(questions, callback);
+module.exports = function(json, callback) {
+    pergunta(questions, json, callback);
 };
