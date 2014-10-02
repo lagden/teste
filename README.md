@@ -1,5 +1,5 @@
 Teste
 =====
 
-[] Perguntar o nome
-[] gravar json com o resultado
+- [ ] Perguntar o nome
+- [ ] Gravar json com o resultado
