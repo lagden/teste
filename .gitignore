@@ -1,3 +1,4 @@
 node_modules
 candidatos/*.json
+html/*.html
 *.log
